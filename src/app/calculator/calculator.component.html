@@ -1,0 +1,215 @@
+<div class="card no-margin">
+    <h1>Form Elements</h1>
+
+    <div class="ui-g form-group">
+        <div class="ui-g-6 ui-md-6">
+            <span class="md-inputfield">
+                <input style="font-size: 2em" id="input" type="text" [(ngModel)]="kWhSize" (ngModelChange)="onkWhSizeChange($event)"
+                    pInputText />
+                <label>KW Size</label>
+            </span>
+        </div>
+        <div class="ui-g-6 ui-md-6">
+            <span class="md-inputfield">
+                <input style="font-size: 2em" id="input" type="text" [(ngModel)]="basePrice" (ngModelChange)="onBasePriceChange($event)"
+                    pInputText />
+                <label>Base Price</label>
+            </span>
+        </div>
+
+        <div class="ui-g-12 ui-md-12">
+            <div class="ui-g">
+                <div class="ui-g-6">
+                    <p-checkbox name="cg" label="Lead Setter" [(ngModel)]="isLeadSetter" binary="true" (ngModelChange)="onIsLeadSetterChange($event)"></p-checkbox>
+                </div>
+                <div class="ui-g-6">
+                    <p-checkbox name="cg" label="Fed Credit" [(ngModel)]="isFederalCredit" binary="true"
+                        (ngModelChange)="onIsFederalCreditChange($event)"></p-checkbox>
+                </div>
+                <div class="ui-g-6">
+                    <p-checkbox name="cg" label="NV Rebate" [(ngModel)]="isNVRebate" binary="true" (ngModelChange)="onIsNvRebateChange($event)"></p-checkbox>
+                </div>
+                <div class="ui-g-6">
+                    <p-checkbox name="cg" label="Override KW Size" [(ngModel)]="isOverridekWhSizeActive" binary="true"
+                        (ngModelChange)="onisOverridekWhSizeActiveChange($event)"></p-checkbox>
+                </div>
+                <div class="ui-g-6">
+                    <p-checkbox name="cg" label="Override Base" [(ngModel)]="isOverrideBasePriceActive" binary="true"
+                        (ngModelChange)="onisOverrideBasePriceActiveChange($event)"></p-checkbox>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ui-g dashboard ui-g">
+    <div *ngFor="let l of bankLoans" class="ui-g-12 ui-md-12">
+        <div class="ui-g-12 ui-md-12">
+            <div class="overview-box overview-box-1">
+                <div class="overview-box-header"></div>
+                <div class="overview-box-content">
+                    <div class="overview-box-icon"><i class="material-icons">inbox</i></div>
+                    <div class="overview-box-title">{{l.loanType}}</div>
+                    <div class="overview-box-count">{{(l.payment *1.035) | number:'1.0-2'}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12 task-list">
+            <p-panel header="Bank">
+                <button pButton type="button" icon="ui-icon-menu" class="secondary-btn" (click)="menu.toggle($event)"></button>
+                <p-menu #menu popup="popup" [model]="items" [style]="{'width': '12.5em'}"></p-menu>
+
+                <ul class="task-list-container">
+                    <li>
+                        <!-- <p-checkbox binary="true"></p-checkbox> -->
+                        <span class="task-name">CMS: </span>
+                        <span class="task-name loan-prop">{{l.cms | number:'1.0-2'}}</span>
+                        <i class="material-icons">shop</i>
+                    </li>
+                    <li>
+                        <span class="task-name">perKw: </span>
+                        <span class="task-name loan-prop">{{l.perKw | number:'1.0-2'}}</span>
+                        <i class="material-icons">credit_card</i>
+                    </li>
+                    <li>
+                        <span class="task-name">Dealer Fee Percent: </span>
+                        <span class="task-name loan-prop">{{l.dealerFeePercent | number:'1.0-2'}}</span>
+                        <i class="material-icons">local_dining</i>
+                    </li>
+                    <li>
+                        <span class="task-name">Interest: </span>
+                        <span class="task-name loan-prop">{{l.interest | number:'1.0-2'}}</span>
+                        <i class="material-icons">alarm</i>
+                    </li>
+                    <li>
+                        <span class="task-name">Term: </span>
+                        <span class="task-name loan-prop">{{l.term | number:'1.0-2'}}</span>
+                        <i class="material-icons">palette</i>
+                    </li>
+                    <li>
+                        <span class="task-name">kWh Size: </span>
+                        <span class="task-name loan-prop">{{l.kWhSize | number:'1.0-2'}}</span>
+                        <i class="material-icons">flight</i>
+                    </li>
+                    <li>
+                        <span class="task-name">ppw: </span>
+                        <span class="task-name loan-prop">{{l.ppw | number:'1.0-2'}}</span>
+                        <i class="material-icons">translate</i>
+                    </li>
+                    <li>
+                        <span class="task-name">Base: </span>
+                        <span class="task-name loan-prop">{{l.base | number:'1.0-2'}}</span>
+                        <i class="material-icons">translate</i>
+                    </li>
+                    <li>
+                        <span class="task-name">Price Before Roof: </span>
+                        <span class="task-name loan-prop">{{l.priceBeforeRoof | number:'1.0-2'}}</span>
+                        <i class="material-icons">translate</i>
+                    </li>
+                    <li>
+                        <span class="task-name">Net System Price: </span>
+                        <span class="task-name loan-prop">{{l.netSystemPrice | number:'1.0-2'}}</span>
+                        <i class="material-icons">translate</i>
+                    </li>
+                    <li>
+                        <span class="task-name">Federal Tax Credit: </span>
+                        <span class="task-name loan-prop">{{l.federalTaxCredit | number:'1.0-2'}}</span>
+                        <i class="material-icons">translate</i>
+                    </li>
+                    <li>
+                        <span class="task-name">NV Rebate: </span>
+                        <span class="task-name loan-prop">{{l.nvRebate | number:'1.0-2'}}</span>
+                        <i class="material-icons">translate</i>
+                    </li>
+                    <li>
+                        <span class="task-name">Total After Credits: </span>
+                        <span class="task-name loan-prop">{{l.totalAfterCredits | number:'1.0-2'}}</span>
+                        <i class="material-icons">translate</i>
+                    </li>
+                    <li>
+                        <span class="task-name">Dealer Fee: </span>
+                        <span class="task-name loan-prop">{{l.dealerFee | number:'1.0-2'}}</span>
+                        <i class="material-icons">translate</i>
+                    </li>
+                    <li>
+                        <span class="task-name">Dealer Cost: </span>
+                        <span class="task-name loan-prop">{{l.dealerCost | number:'1.0-2'}}</span>
+                        <i class="material-icons">translate</i>
+                    </li>
+                    <li>
+                        <span class="task-name">Audit: </span>
+                        <span class="task-name loan-prop">{{l.audit | number:'1.0-2'}}</span>
+                        <i class="material-icons">translate</i>
+                    </li>
+                    <li>
+                        <span class="task-name">Roof Cost: </span>
+                        <span class="task-name loan-prop">{{l.roofCost | number:'1.0-2'}}</span>
+                        <i class="material-icons">translate</i>
+                    </li>
+                    <li>
+                        <span class="task-name">Lead Setter: </span>
+                        <span class="task-name loan-prop">{{l.leadSetter | number:'1.0-2'}}</span>
+                        <i class="material-icons">translate</i>
+                    </li>
+                    <li>
+                        <span class="task-name">Wished Ppw: </span>
+                        <span class="task-name loan-prop">{{l.wishedPpw | number:'1.0-2'}}</span>
+                        <i class="material-icons">translate</i>
+                    </li>
+                </ul>
+            </p-panel>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <div class="ui-g-12 ui-md-3">
+        <div class="overview-box overview-box-1">
+            <div class="overview-box-header"></div>
+            <div class="overview-box-content">
+                <div class="overview-box-icon"><i class="material-icons">inbox</i></div>
+                <div class="overview-box-title">Messages</div>
+                <div class="overview-box-count">152</div>
+            </div>
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-3">
+        <div class="overview-box overview-box-2">
+            <div class="overview-box-header"></div>
+            <div class="overview-box-content">
+                <div class="overview-box-icon"><i class="material-icons">person_pin_circle</i></div>
+                <div class="overview-box-title">Check-Ins</div>
+                <div class="overview-box-count">532</div>
+            </div>
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-3">
+        <div class="overview-box overview-box-3">
+            <div class="overview-box-header"></div>
+            <div class="overview-box-content">
+                <div class="overview-box-icon"><i class="material-icons">insert_drive_file</i></div>
+                <div class="overview-box-title">Files Sycned</div>
+                <div class="overview-box-count">28</div>
+            </div>
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-3">
+        <div class="overview-box overview-box-4">
+            <div class="overview-box-header"></div>
+            <div class="overview-box-content">
+                <div class="overview-box-icon"><i class="material-icons">supervisor_account</i></div>
+                <div class="overview-box-title">Users Online</div>
+                <div class="overview-box-count">256</div>
+            </div>
+        </div>
+    </div> -->
+</div>
