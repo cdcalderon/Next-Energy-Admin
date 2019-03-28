@@ -10,16 +10,67 @@ import { MenuItem } from 'primeng/primeng';
 export class CalculatorComponent implements OnInit {
     title = 'next-solar-calculator';
     kWhSize = 6.365;
+    ppwGlobal = 4.80;
     isLeadSetter: boolean = false;
     isFederalCredit: boolean = true;
     isNVRebate: boolean = false;
     isOverrideBasePriceActive: boolean = false;
-    isOverridekWhSizeActive: boolean = false;
+    isOverridekWhSizeActive: boolean = true;
     setter: number = 350;
     desiredKcms: number = 700;
-    basePrice: number = 2.5;
+    basePrice: number = 3.0;
     items: MenuItem[];
+    netSystemPrice: number;
+    federalTaxCredit: number;
+    nvRebate: number;
+    totalAfterCredits: number;
     bankLoans: BankLoan[] = [
+        {
+            loanType: 'LOANPAL 2039',
+            payment: 0,
+            cms: 0,
+            perKw: 0,
+            dealerFeePercent: 17.49 / 100,
+            interest: 3.99 / 100,
+            term: 240,
+            kWhSize: 6.365,
+            ppw: 4.80,
+            base: 3.0,
+            priceBeforeRoof: 0,
+            netSystemPrice: 0,
+            federalTaxCredit: 0,
+            nvRebate: 0,
+            totalAfterCredits: 0,
+            dealerFee: 0,
+            dealerCost: 840,
+            audit: 0,
+            roofCost: 0,
+            leadSetter: 0,
+            wishedPpw: 0
+        },
+        {
+            loanType: 'LOANPAL 2029',
+            payment: 0,
+            cms: 0,
+            perKw: 0,
+            dealerFeePercent: 23 / 100,
+            interest: 2.99 / 100,
+            term: 240,
+            kWhSize: 6.365,
+            ppw: 4.80,
+            base: 3.0,
+            priceBeforeRoof: 0,
+            netSystemPrice: 0,
+            federalTaxCredit: 0,
+            nvRebate: 0,
+            totalAfterCredits: 0,
+            dealerFee: 0,
+            dealerCost: 1104,
+            audit: 0,
+            roofCost: 0,
+            leadSetter: 0,
+            wishedPpw: 0
+        },
         {
             loanType: 'LOANPAL 1229',
             payment: 0,
@@ -30,7 +81,7 @@ export class CalculatorComponent implements OnInit {
             term: 144,
             kWhSize: 6.365,
             ppw: 4.80,
-            base: 2.50,
+            base: 3.0,
             priceBeforeRoof: 0,
             netSystemPrice: 0,
             federalTaxCredit: 0,
@@ -43,98 +94,98 @@ export class CalculatorComponent implements OnInit {
             leadSetter: 0,
             wishedPpw: 0
         },
-        {
-            loanType: 'Cash',
-            payment: 0,
-            cms: 0,
-            perKw: 0,
-            dealerFeePercent: 0,
-            interest: 0,
-            term: 1,
-            kWhSize: 6.365,
-            ppw: 4.80,
-            base: 2.50,
-            priceBeforeRoof: 0,
-            netSystemPrice: 0,
-            federalTaxCredit: 0,
-            nvRebate: 0,
-            totalAfterCredits: 0,
-            dealerFee: 0,
-            dealerCost: 0,
-            audit: 0,
-            roofCost: 0,
-            leadSetter: 0,
-            wishedPpw: 0
-        },
-        {
-            loanType: 'LOANPAL 1029',
-            payment: 0,
-            cms: 0,
-            perKw: 0,
-            dealerFeePercent: 16.25 / 100,
-            interest: 2.99 / 100,
-            term: 120,
-            kWhSize: 6.365,
-            ppw: 4.80,
-            base: 2.50,
-            priceBeforeRoof: 0,
-            netSystemPrice: 0,
-            federalTaxCredit: 0,
-            nvRebate: 0,
-            totalAfterCredits: 0,
-            dealerFee: 0,
-            dealerCost: 780,
-            audit: 0,
-            roofCost: 0,
-            leadSetter: 0,
-            wishedPpw: 0
-        },
-        {
-            loanType: 'SF 6059',
-            payment: 0,
-            cms: 0,
-            perKw: 0,
-            dealerFeePercent: 19.50 / 100,
-            interest: 3.79 / 100,
-            term: 240,
-            kWhSize: 6.365,
-            ppw: 4.80,
-            base: 2.50,
-            priceBeforeRoof: 0,
-            netSystemPrice: 0,
-            federalTaxCredit: 0,
-            nvRebate: 0,
-            totalAfterCredits: 0,
-            dealerFee: 0,
-            dealerCost: 936,
-            audit: 0,
-            roofCost: 0,
-            leadSetter: 0,
-            wishedPpw: 0
-        },
-        {
-            loanType: 'SUNF 2039',
-            payment: 0,
-            cms: 0,
-            perKw: 0,
-            dealerFeePercent: 16.50 / 100,
-            interest: 3.99 / 100,
-            term: 240,
-            kWhSize: 6.365,
-            ppw: 4.80,
-            base: 2.50,
-            priceBeforeRoof: 0,
-            netSystemPrice: 0,
-            federalTaxCredit: 0,
-            nvRebate: 0,
-            totalAfterCredits: 0,
-            dealerFee: 0,
-            dealerCost: 792,
-            audit: 0,
-            roofCost: 0,
-            leadSetter: 0,
-            wishedPpw: 0
-        }
+        // {
+        //     loanType: 'Cash',
+        //     payment: 0,
+        //     cms: 0,
+        //     perKw: 0,
+        //     dealerFeePercent: 0,
+        //     interest: 0,
+        //     term: 1,
+        //     kWhSize: 6.365,
+        //     ppw: 4.80,
+        //     base: 3.0,
+        //     priceBeforeRoof: 0,
+        //     netSystemPrice: 0,
+        //     federalTaxCredit: 0,
+        //     nvRebate: 0,
+        //     totalAfterCredits: 0,
+        //     dealerFee: 0,
+        //     dealerCost: 0,
+        //     audit: 0,
+        //     roofCost: 0,
+        //     leadSetter: 0,
+        //     wishedPpw: 0
+        // },
+        // {
+        //     loanType: 'LOANPAL 1029',
+        //     payment: 0,
+        //     cms: 0,
+        //     perKw: 0,
+        //     dealerFeePercent: 16.25 / 100,
+        //     interest: 2.99 / 100,
+        //     term: 120,
+        //     kWhSize: 6.365,
+        //     ppw: 4.80,
+        //     base: 3.0,
+        //     priceBeforeRoof: 0,
+        //     netSystemPrice: 0,
+        //     federalTaxCredit: 0,
+        //     nvRebate: 0,
+        //     totalAfterCredits: 0,
+        //     dealerFee: 0,
+        //     dealerCost: 780,
+        //     audit: 0,
+        //     roofCost: 0,
+        //     leadSetter: 0,
+        //     wishedPpw: 0
+        // },
+        // {
+        //     loanType: 'SF 6059',
+        //     payment: 0,
+        //     cms: 0,
+        //     perKw: 0,
+        //     dealerFeePercent: 19.50 / 100,
+        //     interest: 3.79 / 100,
+        //     term: 240,
+        //     kWhSize: 6.365,
+        //     ppw: 4.80,
+        //     base: 3.0,
+        //     priceBeforeRoof: 0,
+        //     netSystemPrice: 0,
+        //     federalTaxCredit: 0,
+        //     nvRebate: 0,
+        //     totalAfterCredits: 0,
+        //     dealerFee: 0,
+        //     dealerCost: 936,
+        //     audit: 0,
+        //     roofCost: 0,
+        //     leadSetter: 0,
+        //     wishedPpw: 0
+        // },
+        // {
+        //     loanType: 'SUNF 2039',
+        //     payment: 0,
+        //     cms: 0,
+        //     perKw: 0,
+        //     dealerFeePercent: 16.50 / 100,
+        //     interest: 3.99 / 100,
+        //     term: 240,
+        //     kWhSize: 6.365,
+        //     ppw: 4.80,
+        //     base: 3.0,
+        //     priceBeforeRoof: 0,
+        //     netSystemPrice: 0,
+        //     federalTaxCredit: 0,
+        //     nvRebate: 0,
+        //     totalAfterCredits: 0,
+        //     dealerFee: 0,
+        //     dealerCost: 792,
+        //     audit: 0,
+        //     roofCost: 0,
+        //     leadSetter: 0,
+        //     wishedPpw: 0
+        // }
     ];
 
     ngOnInit(): void {
@@ -188,18 +239,18 @@ export class CalculatorComponent implements OnInit {
             pmt /= (1 + rate);
         }
 
-        return pmt;
+        return Math.abs(pmt);
     }
 
     calculatePayment2(ratePerPeriod: number, numberOfPayments: number, presentValue: number, futureValue: number, type: number) {
         if (ratePerPeriod != 0.0) {
             // Interest rate exists
             const q = Math.pow(1 + ratePerPeriod, numberOfPayments);
-            return -(ratePerPeriod * (futureValue + (q * presentValue))) / ((-1 + q) * (1 + ratePerPeriod * (type)));
+            return (ratePerPeriod * (futureValue + (q * presentValue))) / ((-1 + q) * (1 + ratePerPeriod * (type)));
 
         } else if (numberOfPayments != 0.0) {
             // No interest rate, but number of payments exists
-            return -(futureValue + presentValue) / numberOfPayments;
+            return (futureValue + presentValue) / numberOfPayments;
         }
 
         return 0;
@@ -316,10 +367,18 @@ export class CalculatorComponent implements OnInit {
         }
     }
 
+    onPpwChange(event: any) {
+        console.log('onPpwChange ', event);
+        this.ppwGlobal = this.numberVal(event);
+        this.calculateLoans();
+    }
+
     calculateLoans() {
         this.bankLoans = this.bankLoans.map(bl => {
             bl.kWhSize = this.numberVal(this.isOverridekWhSizeActive ? this.kWhSize : bl.kWhSize);
             bl.base = this.numberVal(this.isOverrideBasePriceActive ? this.basePrice : bl.base);
+            bl.ppw = this.ppwGlobal;
+
             const netSystemPrice = this.calculateNetSystemPrice(bl.kWhSize, bl.ppw, bl.dealerFeePercent, bl.roofCost);
             const nvRebate = this.calculateNvRebate(bl.kWhSize);
             const federalTaxCredit = this.calculateFederalTaxCredit(netSystemPrice);
@@ -328,6 +387,10 @@ export class CalculatorComponent implements OnInit {
             const totalAfterCredits = this.calculateTotalAfterCredit(nvRebate, federalTaxCredit, netSystemPrice);
             const cms = this.calculateCms(bl.kWhSize, bl.ppw, bl.base, dealerFee, bl.audit, bl.leadSetter);
 
+            this.netSystemPrice = netSystemPrice;
+            this.federalTaxCredit = federalTaxCredit;
+            this.nvRebate = nvRebate;
+            this.totalAfterCredits = totalAfterCredits;
             return <BankLoan>{
                 loanType: bl.loanType,
                 dealerFeePercent: bl.dealerFeePercent,
@@ -359,5 +422,9 @@ export class CalculatorComponent implements OnInit {
             return 0;
         }
         return typeof value === 'string' ? parseFloat(value) : value;
+    }
+
+    loanTypeHeader(loanType: string) {
+        return loanType.split(' ')[0];
     }
 }
