@@ -1,17 +1,19 @@
 <div class="card no-margin">
-    V3
     <div class="ui-g form-group">
         <div class="ui-g-6 ui-md-6">
             <span class="md-inputfield">
+                <input type="number" class="cal-editable-field" id="input" [(ngModel)]="kWhSize" (ngModelChange)="onkWhSizeChange($event)"
+                    pInputText />
+                <!-- <strong style="font-size: 2em">.</strong>
                 <input type="text" pattern="[0-9]*" decimal="true" style="font-size: 2em;max-width: 150px !important"
-                    id="input" type="text" [(ngModel)]="kWhSize" (ngModelChange)="onkWhSizeChange($event)" pInputText />
+                    id="input" type="text" [(ngModel)]="kWhSize" (ngModelChange)="onkWhSizeChange($event)" pInputText /> -->
                 <label>KW Size</label>
             </span>
         </div>
         <div class="ui-g-6 ui-md-6">
             <span class="md-inputfield">
-                <input type="text" pattern="[0-9]*" decimal="true" style="font-size: 2em;width: 150px !important" id="input"
-                    type="text" [(ngModel)]="ppwGlobal" (ngModelChange)="onPpwChange($event)" pInputText />
+                <input type="number" class="cal-editable-field" id="input" [(ngModel)]="ppwGlobal" (ngModelChange)="onPpwChange($event)"
+                    pInputText />
                 <label>PPW</label>
             </span>
         </div>
@@ -42,19 +44,19 @@
             </div>
             <hr>
             <div class="ui-g-6">
-                <span class="task-name">Net System Price: </span>
+                <span class="task-name read-only-field">Net System Price: </span>
                 <span class="task-name loan-prop">${{netSystemPrice | number:'1.0-2'}}</span>
             </div>
             <div class="ui-g-6">
-                <span class="task-name">Tax Credit: </span>
+                <span class="task-name read-only-field">Tax Credit: </span>
                 <span class="task-name loan-prop">${{federalTaxCredit | number:'1.0-2'}}</span>
             </div>
             <div class="ui-g-6">
-                <span style="min-width: 85px;float: left" class="task-name">NV Rebate: </span>
+                <span class="task-name read-only-field">NV Rebate: </span>
                 <span class="task-name loan-prop">${{nvRebate | number:'1.0-2'}}</span>
             </div>
             <div class="ui-g-6">
-                <span class="task-name">After Credits: </span>
+                <span class="task-name read-only-field">After Credits: </span>
                 <span class="task-name loan-prop">${{totalAfterCredits | number:'1.0-2'}}</span>
             </div>
         </div>

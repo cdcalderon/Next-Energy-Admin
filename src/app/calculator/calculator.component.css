@@ -2,3 +2,13 @@
     margin-left: 5px;
     font-weight: bold;
 }
+
+.cal-editable-field {
+    font-size: 2em;
+    width: 150px !important;
+}
+
+.read-only-field {
+    min-width: 85px;
+    float: left;
+}
