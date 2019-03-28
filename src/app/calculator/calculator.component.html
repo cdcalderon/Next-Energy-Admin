@@ -2,8 +2,8 @@
     <div class="ui-g form-group">
         <div class="ui-g-6 ui-md-6">
             <span class="md-inputfield">
-                <input type="number" class="cal-editable-field" id="input" [(ngModel)]="kWhSize" (ngModelChange)="onkWhSizeChange($event)"
-                    pInputText />
+                <input OnlyNumber="true" type="number" class="cal-editable-field" id="input" [(ngModel)]="kWhSize"
+                    (ngModelChange)="onkWhSizeChange($event)" pInputText />
                 <!-- <strong style="font-size: 2em">.</strong>
                 <input type="text" pattern="[0-9]*" decimal="true" style="font-size: 2em;max-width: 150px !important"
                     id="input" type="text" [(ngModel)]="kWhSize" (ngModelChange)="onkWhSizeChange($event)" pInputText /> -->
@@ -12,8 +12,8 @@
         </div>
         <div class="ui-g-6 ui-md-6">
             <span class="md-inputfield">
-                <input type="number" class="cal-editable-field" id="input" [(ngModel)]="ppwGlobal" (ngModelChange)="onPpwChange($event)"
-                    pInputText />
+                <input OnlyNumber="true" type="number" class="cal-editable-field" id="input" [(ngModel)]="ppwGlobal"
+                    (ngModelChange)="onPpwChange($event)" pInputText />
                 <label>PPW</label>
             </span>
         </div>

@@ -100,6 +100,7 @@ import {NodeService} from './demo/service/nodeservice';
 
 import {BreadcrumbService} from './breadcrumb.service';
 import { CalculatorComponent } from './calculator/calculator.component';
+import { OnlyNumbersDirective } from './directives/only-numbers.directive';
 
 @NgModule({
     imports: [
@@ -197,7 +198,8 @@ import { CalculatorComponent } from './calculator/calculator.component';
         FileDemoComponent,
         UtilsDemoComponent,
         DocumentationComponent,
-        CalculatorComponent
+        CalculatorComponent,
+        OnlyNumbersDirective
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
